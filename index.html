@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>검색등록 한 걸음씩 — 구글·네이버·빙 사이트 등록 가이드</title>
+<meta name="description" content="내 사이트를 구글·네이버·빙 검색에 나오게 하는 25단계 가이드. 한 번에 한 단계씩, 복사해서 붙여넣기만 하면 됩니다." />
+<style>
+  /* ===== 색 토큰 ===== */
+  :root{
+    --bg:#f5f4f0; --surface:#ffffff; --surface-2:#faf9f6;
+    --ink:#1c1b19; --ink-2:#57534e; --ink-3:#8a857e;
+    --line:#e3e0da; --line-2:#d3cfc7;
+    --accent:#1f6feb; --accent-ink:#ffffff;
+    --code-bg:#1c1b19; --code-ink:#f0ede6;
+    --ok:#15803d; --ok-bg:#eaf6ee;
+    --tip-bg:#fdf6e3; --tip-line:#e8d9a8; --tip-ink:#6b5615;
+    --blue:#1f6feb;  --blue-bg:#e8f0fe;
+    --green:#15803d; --green-bg:#e7f5ec;
+    --purple:#7c3aed;--purple-bg:#f0e9fe;
+    --amber:#b45309; --amber-bg:#fdf1e0;
+    --gray:#57534e;  --gray-bg:#eeece7;
+    --shadow:0 1px 2px rgba(28,27,25,.05), 0 8px 24px -12px rgba(28,27,25,.18);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#16151a; --surface:#201f26; --surface-2:#1a1920;
+      --ink:#eeecf2; --ink-2:#b3afbd; --ink-3:#87838f;
+      --line:#33313c; --line-2:#454250;
+      --accent:#6b9dff; --accent-ink:#10101a;
+      --code-bg:#0f0e13; --code-ink:#e6e3ec;
+      --ok:#5fd08a; --ok-bg:#16281e;
+      --tip-bg:#2a2418; --tip-line:#4a3f22; --tip-ink:#e8d9a8;
+      --blue:#6b9dff;  --blue-bg:#1a2338;
+      --green:#5fd08a; --green-bg:#152a1e;
+      --purple:#b18cff;--purple-bg:#241b3a;
+      --amber:#e0a458; --amber-bg:#2e2314;
+      --gray:#b3afbd;  --gray-bg:#262530;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#16151a; --surface:#201f26; --surface-2:#1a1920;
+    --ink:#eeecf2; --ink-2:#b3afbd; --ink-3:#87838f;
+    --line:#33313c; --line-2:#454250;
+    --accent:#6b9dff; --accent-ink:#10101a;
+    --code-bg:#0f0e13; --code-ink:#e6e3ec;
+    --ok:#5fd08a; --ok-bg:#16281e;
+    --tip-bg:#2a2418; --tip-line:#4a3f22; --tip-ink:#e8d9a8;
+    --blue:#6b9dff;  --blue-bg:#1a2338;
+    --green:#5fd08a; --green-bg:#152a1e;
+    --purple:#b18cff;--purple-bg:#241b3a;
+    --amber:#e0a458; --amber-bg:#2e2314;
+    --gray:#b3afbd;  --gray-bg:#262530;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.7);
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,-apple-system,"Segoe UI",sans-serif;
+    font-size:18px; line-height:1.7; letter-spacing:-.01em;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:0 20px 120px}
+
+  /* ===== 헤더 ===== */
+  header{position:sticky; top:0; z-index:30; background:var(--bg); border-bottom:1px solid var(--line)}
+  .hd{max-width:760px; margin:0 auto; padding:14px 20px 12px; display:flex; align-items:center; gap:14px}
+  .brand{font-size:17px; font-weight:700; letter-spacing:-.02em; white-space:nowrap}
+  .brand span{color:var(--ink-3); font-weight:500}
+  .hd-right{margin-left:auto; display:flex; align-items:center; gap:10px}
+  .count{font-variant-numeric:tabular-nums; font-size:15px; color:var(--ink-2); font-weight:600; white-space:nowrap}
+  .ghost{
+    background:transparent; border:1px solid var(--line-2); color:var(--ink-2);
+    border-radius:999px; padding:6px 13px; font-size:14px; font-weight:600; cursor:pointer;
+    font-family:inherit; white-space:nowrap;
+  }
+  .ghost:hover{background:var(--surface); color:var(--ink)}
+  .bar{height:6px; background:var(--line); position:relative; overflow:hidden}
+  .bar i{position:absolute; inset:0 auto 0 0; width:0%; background:var(--accent); transition:width .35s cubic-bezier(.4,0,.2,1)}
+
+  /* ===== 주소 입력 ===== */
+  .domain{
+    margin:22px 0 26px; background:var(--surface); border:1px solid var(--line);
+    border-radius:16px; padding:18px 20px; box-shadow:var(--shadow);
+  }
+  .domain label{display:block; font-size:14px; font-weight:700; color:var(--ink-2); margin-bottom:4px}
+  .domain .hint{font-size:13.5px; color:var(--ink-3); margin:0 0 12px; line-height:1.55}
+  .domain-row{display:flex; gap:9px; flex-wrap:wrap}
+  .domain input{
+    flex:1 1 260px; min-width:0; font-family:inherit; font-size:17px; padding:12px 15px;
+    border:1.5px solid var(--line-2); border-radius:11px; background:var(--surface-2); color:var(--ink);
+  }
+  .domain input:focus{outline:none; border-color:var(--accent); box-shadow:0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent)}
+  .domain button{
+    font-family:inherit; font-size:16px; font-weight:700; padding:12px 22px; border:none;
+    border-radius:11px; background:var(--accent); color:var(--accent-ink); cursor:pointer;
+  }
+  .saved{font-size:13.5px; color:var(--ok); font-weight:600; margin:10px 0 0; display:none}
+  .saved.on{display:block}
+
+  /* ===== 단계 카드 ===== */
+  .card{
+    background:var(--surface); border:1px solid var(--line); border-radius:20px;
+    padding:30px 28px; box-shadow:var(--shadow); animation:in .3s cubic-bezier(.2,.7,.3,1);
+  }
+  @keyframes in{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
+  @media (prefers-reduced-motion:reduce){ .card{animation:none} .bar i{transition:none} }
+
+  .meta{display:flex; align-items:center; gap:9px; flex-wrap:wrap; margin-bottom:18px}
+  .badge{
+    display:inline-flex; align-items:center; gap:6px; font-size:13.5px; font-weight:700;
+    padding:5px 13px; border-radius:999px;
+  }
+  .b-blue{background:var(--blue-bg); color:var(--blue)}
+  .b-green{background:var(--green-bg); color:var(--green)}
+  .b-purple{background:var(--purple-bg); color:var(--purple)}
+  .b-amber{background:var(--amber-bg); color:var(--amber)}
+  .b-gray{background:var(--gray-bg); color:var(--gray)}
+  .mins{font-size:13.5px; color:var(--ink-3); font-weight:600}
+
+  .stepno{font-size:14px; font-weight:800; color:var(--ink-3); letter-spacing:.04em; margin:0 0 6px}
+  h1.t{font-size:30px; line-height:1.3; font-weight:800; letter-spacing:-.03em; margin:0 0 12px}
+  .lead{font-size:17.5px; color:var(--ink-2); margin:0 0 24px; line-height:1.65}
+
+  .todo{list-style:none; margin:0 0 22px; padding:0; counter-reset:t}
+  .todo li{
+    counter-increment:t; position:relative; padding:11px 0 11px 42px;
+    border-top:1px solid var(--line); font-size:17px; line-height:1.6;
+  }
+  .todo li:first-child{border-top:none}
+  .todo li::before{
+    content:counter(t); position:absolute; left:0; top:12px;
+    width:27px; height:27px; border-radius:50%; background:var(--gray-bg); color:var(--ink-2);
+    font-size:14px; font-weight:800; display:grid; place-items:center;
+  }
+
+  .blk{margin:0 0 20px}
+  .blk-label{font-size:13.5px; font-weight:700; color:var(--ink-3); margin:0 0 7px}
+  .copybox{
+    display:flex; align-items:stretch; gap:0; border:1.5px solid var(--line-2);
+    border-radius:12px; overflow:hidden; background:var(--surface-2);
+  }
+  .copybox code{
+    flex:1; min-width:0; padding:13px 15px; font-size:16px; font-weight:600;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    color:var(--ink); overflow-x:auto; white-space:nowrap; display:block;
+  }
+  .copybox button{
+    flex:0 0 auto; border:none; border-left:1.5px solid var(--line-2); background:var(--surface);
+    color:var(--accent); font-family:inherit; font-size:15px; font-weight:700;
+    padding:0 18px; cursor:pointer; white-space:nowrap;
+  }
+  .copybox button:hover{background:var(--blue-bg)}
+  .copybox button.done{color:var(--ok); background:var(--ok-bg)}
+
+  pre.code{
+    margin:0; background:var(--code-bg); color:var(--code-ink); border-radius:12px;
+    padding:16px 18px; overflow-x:auto; font-size:14.5px; line-height:1.65;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  .code-wrap{position:relative}
+  .code-wrap > button{
+    position:absolute; top:9px; right:9px; border:1px solid rgba(255,255,255,.22);
+    background:rgba(255,255,255,.1); color:#fff; border-radius:8px; padding:5px 12px;
+    font-family:inherit; font-size:13px; font-weight:700; cursor:pointer;
+  }
+  .code-wrap > button.done{background:var(--ok); border-color:var(--ok); color:#fff}
+
+  .links{display:flex; flex-wrap:wrap; gap:9px; margin:0 0 20px}
+  .links a{
+    display:inline-flex; align-items:center; gap:7px; text-decoration:none;
+    background:var(--accent); color:var(--accent-ink); font-weight:700; font-size:16px;
+    padding:11px 20px; border-radius:11px;
+  }
+  .links a:hover{filter:brightness(1.08)}
+  .links a::after{content:"↗"; font-size:14px; opacity:.75}
+
+  .tip{
+    background:var(--tip-bg); border:1px solid var(--tip-line); border-radius:13px;
+    padding:15px 18px; font-size:16px; line-height:1.6; color:var(--tip-ink); margin:0;
+  }
+  .tip b{font-weight:800}
+  .tip::before{content:"💡 막히면 "; font-weight:800}
+
+  /* ===== 하단 버튼 ===== */
+  .nav{
+    position:fixed; left:0; right:0; bottom:0; z-index:30;
+    background:color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter:blur(12px); border-top:1px solid var(--line); padding:12px 20px;
+    padding-bottom:calc(12px + env(safe-area-inset-bottom));
+  }
+  .nav-in{max-width:760px; margin:0 auto; display:flex; gap:11px}
+  .btn{
+    font-family:inherit; font-weight:800; border-radius:13px; cursor:pointer; border:none;
+    font-size:17px; padding:15px 20px; letter-spacing:-.01em;
+  }
+  .btn-prev{flex:0 0 auto; background:var(--surface); color:var(--ink-2); border:1.5px solid var(--line-2)}
+  .btn-prev:disabled{opacity:.4; cursor:not-allowed}
+  .btn-next{flex:1; background:var(--ok); color:#fff}
+  .btn-next:hover{filter:brightness(1.06)}
+
+  /* ===== 목록 ===== */
+  .toc{margin:26px 0 0; background:var(--surface); border:1px solid var(--line); border-radius:16px; overflow:hidden}
+  .toc > summary{
+    padding:15px 20px; font-weight:700; font-size:16px; cursor:pointer; list-style:none;
+    display:flex; align-items:center; gap:8px;
+  }
+  .toc > summary::-webkit-details-marker{display:none}
+  .toc > summary::after{content:"▾"; margin-left:auto; color:var(--ink-3)}
+  .toc[open] > summary::after{content:"▴"}
+  .toc-body{border-top:1px solid var(--line); padding:8px 0}
+  .grp{padding:12px 20px 6px; font-size:13px; font-weight:800; color:var(--ink-3); letter-spacing:.03em}
+  .row{
+    display:flex; align-items:center; gap:11px; width:100%; text-align:left;
+    padding:9px 20px; background:none; border:none; font-family:inherit; font-size:15.5px;
+    color:var(--ink-2); cursor:pointer; line-height:1.45;
+  }
+  .row:hover{background:var(--surface-2); color:var(--ink)}
+  .row.cur{color:var(--ink); font-weight:700}
+  .dot{
+    flex:0 0 auto; width:22px; height:22px; border-radius:50%; border:2px solid var(--line-2);
+    display:grid; place-items:center; font-size:12px; font-weight:800; color:transparent;
+  }
+  .row.done .dot{background:var(--ok); border-color:var(--ok); color:#fff}
+  .row.done .dot::before{content:"✓"}
+  .row.done span{text-decoration:line-through; opacity:.6}
+
+  /* ===== 완료 ===== */
+  .fin{text-align:center; padding:46px 28px}
+  .fin .em{font-size:60px; line-height:1; margin-bottom:16px}
+  .fin h2{font-size:29px; font-weight:800; letter-spacing:-.03em; margin:0 0 12px}
+  .fin p{font-size:17px; color:var(--ink-2); margin:0 auto 26px; max-width:44ch; line-height:1.65}
+  .fin .links{justify-content:center}
+
+  .foot{margin:34px 0 0; text-align:center; font-size:14px; color:var(--ink-3); line-height:1.7}
+  .foot a{color:var(--ink-2)}
+
+  @media (max-width:560px){
+    body{font-size:17px}
+    .wrap{padding:0 15px 130px}
+    .card{padding:24px 19px; border-radius:17px}
+    h1.t{font-size:25px}
+    .lead{font-size:16.5px}
+    .todo li{font-size:16px; padding-left:38px}
+    .brand span{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hd">
+    <div class="brand">검색등록 한 걸음씩 <span>· 구글 · 네이버 · 빙</span></div>
+    <div class="hd-right">
+      <div class="count" id="count">0 / 25</div>
+      <button class="ghost" id="reset">처음부터</button>
+    </div>
+  </div>
+  <div class="bar"><i id="barfill"></i></div>
+</header>
+
+<div class="wrap">
+
+  <div class="domain">
+    <label for="dm">내 사이트 주소</label>
+    <p class="hint">여기에 한 번만 넣어두면, 아래 모든 단계의 복사 버튼에 <b>내 주소가 자동으로</b> 채워집니다. 아직 사이트가 없으면 비워두고 진행하세요.</p>
+    <div class="domain-row">
+      <input id="dm" type="url" placeholder="https://example.com" autocomplete="url" spellcheck="false" />
+      <button id="dmsave">저장</button>
+    </div>
+    <p class="saved" id="dmsaved">✓ 저장했어요. 모든 단계에 적용됩니다.</p>
+  </div>
+
+  <div id="stage"></div>
+
+  <details class="toc" id="toc">
+    <summary>전체 단계 한눈에 보기</summary>
+    <div class="toc-body" id="tocbody"></div>
+  </details>
+
+  <p class="foot">
+    한 번에 한 단계씩. 오늘 다 못 해도 괜찮아요 — 진행 상황은 이 브라우저에 저장됩니다.<br />
+    <a href="all.html">📄 전체 내용 한 장으로 보기 · 인쇄하기</a>
+  </p>
+</div>
+
+<div class="nav">
+  <div class="nav-in">
+    <button class="btn btn-prev" id="prev">← 이전</button>
+    <button class="btn btn-next" id="next">다 했어요! 다음 →</button>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  /* --- 저장소: 실패해도 앱이 멈추지 않게 --- */
+  var mem = {};
+  function get(k){ try { var v = localStorage.getItem(k); return v === null ? (k in mem ? mem[k] : null) : v; } catch(e){ return (k in mem) ? mem[k] : null; } }
+  function set(k,v){ mem[k] = v; try { localStorage.setItem(k,v); } catch(e){} }
+
+  var KEY_DONE = "seoguide.done", KEY_CUR = "seoguide.cur", KEY_DM = "seoguide.domain";
+
+  var done = {};
+  try { done = JSON.parse(get(KEY_DONE) || "{}") || {}; } catch(e){ done = {}; }
+  var cur = parseInt(get(KEY_CUR) || "0", 10);
+  if (isNaN(cur) || cur < 0 || cur > STEPS.length) cur = 0;
+  var domain = get(KEY_DM) || "";
+
+  var $ = function(id){ return document.getElementById(id); };
+  var stage = $("stage");
+
+  function normalize(d){
+    d = (d || "").trim();
+    if (!d) return "";
+    if (!/^https?:\/\//i.test(d)) d = "https://" + d;
+    return d.replace(/\/+$/, "");
+  }
+  function fill(s){
+    if (typeof s !== "string") return s;
+    return s.replace(/\{\{내주소\}\}/g, domain || "https://내사이트주소.com");
+  }
+  function esc(s){
+    return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  }
+
+  /* --- 렌더 --- */
+  function render(){
+    if (cur >= STEPS.length){ renderFinish(); paint(); return; }
+    var st = STEPS[cur], sec = SECTIONS[st.sec];
+    var h = "";
+
+    h += '<div class="card">';
+    h += '<div class="meta">';
+    h += '<span class="badge b-' + sec.color + '">' + sec.emoji + " " + sec.name + "</span>";
+    h += '<span class="mins">약 ' + st.minutes + "분</span>";
+    h += "</div>";
+    h += '<p class="stepno">STEP ' + (cur + 1) + " / " + STEPS.length + "</p>";
+    h += '<h1 class="t">' + fill(st.title) + "</h1>";
+    h += '<p class="lead">' + fill(st.lead) + "</p>";
+
+    if (st.todo && st.todo.length){
+      h += '<ol class="todo">';
+      for (var i = 0; i < st.todo.length; i++) h += "<li>" + fill(st.todo[i]) + "</li>";
+      h += "</ol>";
+    }
+
+    if (st.copy){
+      var cv = fill(st.copy);
+      h += '<div class="blk"><p class="blk-label">' + (st.copyLabel || "복사해서 쓰세요") + "</p>";
+      h += '<div class="copybox"><code>' + esc(cv) + "</code>";
+      h += '<button type="button" data-copy="' + esc(cv).replace(/"/g,"&quot;") + '">복사</button></div></div>';
+    }
+
+    if (st.code){
+      var kv = fill(st.code);
+      h += '<div class="blk"><p class="blk-label">' + (st.codeLabel || "코드") + "</p>";
+      h += '<div class="code-wrap"><pre class="code">' + esc(kv) + "</pre>";
+      h += '<button type="button" data-copy="' + esc(kv).replace(/"/g,"&quot;") + '">복사</button></div></div>';
+    }
+
+    if (st.links && st.links.length){
+      h += '<div class="links">';
+      for (var j = 0; j < st.links.length; j++)
+        h += '<a href="' + st.links[j].url + '" target="_blank" rel="noopener noreferrer">' + st.links[j].label + "</a>";
+      h += "</div>";
+    }
+
+    if (st.tip) h += '<p class="tip">' + fill(st.tip) + "</p>";
+    h += "</div>";
+
+    stage.innerHTML = h;
+    $("next").textContent = done[cur] ? "다음 →" : "다 했어요! 다음 →";
+    $("prev").disabled = (cur === 0);
+    $("next").style.display = "";
+    $("prev").style.display = "";
+  }
+
+  function renderFinish(){
+    var h = '<div class="card fin">';
+    h += '<div class="em">🎉</div>';
+    h += "<h2>다 끝났습니다!</h2>";
+    h += "<p>구글·네이버·빙 세 곳 모두에 내 사이트를 등록했어요.<br />이제 검색엔진이 찾아올 차례입니다. 보통 <b>3일에서 2주</b> 걸려요.</p>";
+    h += '<div class="links">';
+    h += '<a href="https://search.google.com/search-console" target="_blank" rel="noopener noreferrer">구글 서치 콘솔</a>';
+    h += '<a href="https://searchadvisor.naver.com/" target="_blank" rel="noopener noreferrer">네이버 서치어드바이저</a>';
+    h += '<a href="https://www.bing.com/webmasters" target="_blank" rel="noopener noreferrer">빙 웹마스터 도구</a>';
+    h += "</div>";
+    h += '<p class="tip" style="text-align:left">일주일 뒤 검색창에 <b>site:' + (domain || "내주소") + "</b> 를 넣고 검색해보세요. 내 페이지가 나오면 성공입니다.</p>";
+    h += "</div>";
+    stage.innerHTML = h;
+    $("next").style.display = "none";
+    $("prev").style.display = "";
+    $("prev").disabled = false;
+  }
+
+  function paint(){
+    var n = 0;
+    for (var i = 0; i < STEPS.length; i++) if (done[i]) n++;
+    $("count").textContent = n + " / " + STEPS.length;
+    $("barfill").style.width = (n / STEPS.length * 100) + "%";
+    buildToc();
+  }
+
+  function buildToc(){
+    var body = $("tocbody"), h = "", last = null;
+    for (var i = 0; i < STEPS.length; i++){
+      var st = STEPS[i], sec = SECTIONS[st.sec];
+      if (st.sec !== last){ h += '<div class="grp">' + sec.emoji + " " + sec.name + "</div>"; last = st.sec; }
+      h += '<button class="row' + (done[i] ? " done" : "") + (i === cur ? " cur" : "") + '" data-go="' + i + '">';
+      h += '<span class="dot"></span><span>' + (i + 1) + ". " + fill(st.title).replace(/<[^>]+>/g,"") + "</span></button>";
+    }
+    body.innerHTML = h;
+  }
+
+  function go(i){
+    cur = Math.max(0, Math.min(i, STEPS.length));
+    set(KEY_CUR, String(cur));
+    render(); paint();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  /* --- 이벤트 --- */
+  $("next").addEventListener("click", function(){
+    if (cur < STEPS.length){ done[cur] = true; set(KEY_DONE, JSON.stringify(done)); }
+    go(cur + 1);
+  });
+  $("prev").addEventListener("click", function(){ go(cur - 1); });
+
+  $("reset").addEventListener("click", function(){
+    if (!confirm("진행 상황을 모두 지우고 1단계부터 다시 시작할까요?\n(저장한 사이트 주소는 그대로 둡니다)")) return;
+    done = {}; set(KEY_DONE, "{}"); go(0);
+  });
+
+  document.addEventListener("click", function(e){
+    var b = e.target.closest("[data-copy]");
+    if (b){
+      var txt = b.getAttribute("data-copy");
+      var ok = function(){ var o = b.textContent; b.textContent = "✓ 복사됨"; b.classList.add("done");
+        setTimeout(function(){ b.textContent = o; b.classList.remove("done"); }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(ok, function(){ legacy(txt, ok); });
+      } else legacy(txt, ok);
+      return;
+    }
+    var g = e.target.closest("[data-go]");
+    if (g){ $("toc").open = true; go(parseInt(g.getAttribute("data-go"), 10)); }
+  });
+
+  function legacy(txt, ok){
+    var ta = document.createElement("textarea");
+    ta.value = txt; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); ok(); } catch(e){ alert("복사가 안 됩니다. 직접 선택해서 복사해주세요."); }
+    document.body.removeChild(ta);
+  }
+
+  function saveDomain(){
+    domain = normalize($("dm").value);
+    $("dm").value = domain;
+    set(KEY_DM, domain);
+    $("dmsaved").classList.add("on");
+    setTimeout(function(){ $("dmsaved").classList.remove("on"); }, 2600);
+    render();
+  }
+  $("dmsave").addEventListener("click", saveDomain);
+  $("dm").addEventListener("keydown", function(e){ if (e.key === "Enter") saveDomain(); });
+
+  /* --- 시작 --- */
+  $("dm").value = domain;
+  render(); paint();
+})();
+</script>
+</body>
+</html>

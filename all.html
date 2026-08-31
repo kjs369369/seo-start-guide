@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>전체 보기 — 검색등록 한 걸음씩</title>
+<meta name="description" content="구글·네이버·빙 사이트 등록 25단계 전체 내용. 인쇄해서 옆에 두고 따라 하세요." />
+<style>
+  :root{
+    --bg:#f5f4f0; --surface:#fff; --surface-2:#faf9f6;
+    --ink:#1c1b19; --ink-2:#57534e; --ink-3:#8a857e;
+    --line:#e3e0da; --line-2:#d3cfc7;
+    --accent:#1f6feb; --accent-ink:#fff;
+    --code-bg:#1c1b19; --code-ink:#f0ede6;
+    --tip-bg:#fdf6e3; --tip-line:#e8d9a8; --tip-ink:#6b5615;
+    --blue:#1f6feb; --blue-bg:#e8f0fe;
+    --green:#15803d; --green-bg:#e7f5ec;
+    --purple:#7c3aed; --purple-bg:#f0e9fe;
+    --amber:#b45309; --amber-bg:#fdf1e0;
+    --gray:#57534e; --gray-bg:#eeece7;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#16151a; --surface:#201f26; --surface-2:#1a1920;
+      --ink:#eeecf2; --ink-2:#b3afbd; --ink-3:#87838f;
+      --line:#33313c; --line-2:#454250;
+      --accent:#6b9dff; --accent-ink:#10101a;
+      --code-bg:#0f0e13; --code-ink:#e6e3ec;
+      --tip-bg:#2a2418; --tip-line:#4a3f22; --tip-ink:#e8d9a8;
+      --blue:#6b9dff; --blue-bg:#1a2338;
+      --green:#5fd08a; --green-bg:#152a1e;
+      --purple:#b18cff; --purple-bg:#241b3a;
+      --amber:#e0a458; --amber-bg:#2e2314;
+      --gray:#b3afbd; --gray-bg:#262530;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#16151a; --surface:#201f26; --surface-2:#1a1920;
+    --ink:#eeecf2; --ink-2:#b3afbd; --ink-3:#87838f;
+    --line:#33313c; --line-2:#454250;
+    --accent:#6b9dff; --accent-ink:#10101a;
+    --code-bg:#0f0e13; --code-ink:#e6e3ec;
+    --tip-bg:#2a2418; --tip-line:#4a3f22; --tip-ink:#e8d9a8;
+    --blue:#6b9dff; --blue-bg:#1a2338;
+    --green:#5fd08a; --green-bg:#152a1e;
+    --purple:#b18cff; --purple-bg:#241b3a;
+    --amber:#e0a458; --amber-bg:#2e2314;
+    --gray:#b3afbd; --gray-bg:#262530;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,-apple-system,sans-serif;
+    font-size:16px; line-height:1.65; letter-spacing:-.01em;
+  }
+  .wrap{max-width:820px; margin:0 auto; padding:34px 20px 80px}
+
+  .top{display:flex; align-items:flex-start; gap:14px; flex-wrap:wrap; margin-bottom:8px}
+  h1{font-size:31px; font-weight:800; letter-spacing:-.03em; margin:0; line-height:1.25}
+  .sub{color:var(--ink-2); font-size:16.5px; margin:8px 0 0; max-width:60ch}
+  .acts{margin-left:auto; display:flex; gap:9px; flex-wrap:wrap}
+  .acts button, .acts a{
+    font-family:inherit; font-size:15px; font-weight:700; padding:10px 17px; border-radius:11px;
+    cursor:pointer; text-decoration:none; border:1.5px solid var(--line-2);
+    background:var(--surface); color:var(--ink-2);
+  }
+  .acts .pri{background:var(--accent); color:var(--accent-ink); border-color:transparent}
+
+  .dmbar{
+    margin:22px 0 6px; background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    padding:15px 18px; display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+  }
+  .dmbar label{font-weight:700; font-size:14.5px; color:var(--ink-2); flex:0 0 auto}
+  .dmbar input{
+    flex:1 1 240px; min-width:0; font-family:inherit; font-size:16px; padding:10px 13px;
+    border:1.5px solid var(--line-2); border-radius:10px; background:var(--surface-2); color:var(--ink);
+  }
+  .dmbar button{
+    font-family:inherit; font-size:15px; font-weight:700; padding:10px 18px; border:none;
+    border-radius:10px; background:var(--accent); color:var(--accent-ink); cursor:pointer;
+  }
+
+  .tabs{display:flex; gap:8px; flex-wrap:wrap; margin:24px 0 22px; position:sticky; top:0; background:var(--bg); padding:10px 0; z-index:5}
+  .tabs button{
+    font-family:inherit; font-size:15px; font-weight:700; padding:9px 17px; border-radius:999px;
+    border:1.5px solid var(--line-2); background:var(--surface); color:var(--ink-2); cursor:pointer;
+  }
+  .tabs button.on{background:var(--ink); color:var(--bg); border-color:var(--ink)}
+
+  .sechead{
+    display:flex; align-items:baseline; gap:11px; margin:38px 0 16px; padding-bottom:10px;
+    border-bottom:2px solid var(--line-2);
+  }
+  .sechead h2{font-size:23px; font-weight:800; letter-spacing:-.02em; margin:0}
+  .sechead .n{font-size:14px; color:var(--ink-3); font-weight:600}
+
+  .step{
+    background:var(--surface); border:1px solid var(--line); border-radius:15px;
+    padding:22px 24px; margin:0 0 15px; break-inside:avoid; page-break-inside:avoid;
+  }
+  .sh{display:flex; align-items:baseline; gap:11px; margin-bottom:9px}
+  .num{
+    flex:0 0 auto; width:31px; height:31px; border-radius:9px; display:grid; place-items:center;
+    font-size:15px; font-weight:800;
+  }
+  .n-blue{background:var(--blue-bg); color:var(--blue)}
+  .n-green{background:var(--green-bg); color:var(--green)}
+  .n-purple{background:var(--purple-bg); color:var(--purple)}
+  .n-amber{background:var(--amber-bg); color:var(--amber)}
+  .n-gray{background:var(--gray-bg); color:var(--gray)}
+  .sh h3{font-size:19.5px; font-weight:800; letter-spacing:-.02em; margin:0; line-height:1.35; flex:1}
+  .sh .m{font-size:13px; color:var(--ink-3); font-weight:600; white-space:nowrap}
+  .lead{color:var(--ink-2); margin:0 0 14px; font-size:16px}
+
+  ol.todo{margin:0 0 14px; padding-left:22px}
+  ol.todo li{margin:0 0 6px; line-height:1.6}
+
+  .lbl{font-size:12.5px; font-weight:800; color:var(--ink-3); margin:0 0 5px; letter-spacing:.02em}
+  .inline{
+    display:inline-block; background:var(--surface-2); border:1.5px solid var(--line-2);
+    border-radius:9px; padding:8px 13px; font-family:ui-monospace,Menlo,Consolas,monospace;
+    font-size:15px; font-weight:600; margin:0 0 14px; word-break:break-all;
+  }
+  pre{
+    margin:0 0 14px; background:var(--code-bg); color:var(--code-ink); border-radius:11px;
+    padding:14px 16px; overflow-x:auto; font-size:13.5px; line-height:1.6;
+    font-family:ui-monospace,Menlo,Consolas,monospace; white-space:pre-wrap; word-break:break-all;
+  }
+  .lk{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px}
+  .lk a{
+    text-decoration:none; background:var(--accent); color:var(--accent-ink);
+    font-weight:700; font-size:14.5px; padding:8px 15px; border-radius:9px;
+  }
+  .tip{
+    background:var(--tip-bg); border:1px solid var(--tip-line); border-radius:11px;
+    padding:12px 15px; font-size:15px; color:var(--tip-ink); margin:0; line-height:1.55;
+  }
+  .tip::before{content:"💡 "; font-weight:800}
+
+  .foot{margin:40px 0 0; text-align:center; font-size:14px; color:var(--ink-3)}
+  .foot a{color:var(--ink-2)}
+
+  @media (max-width:560px){
+    .wrap{padding:24px 15px 70px}
+    h1{font-size:25px}
+    .step{padding:19px 17px}
+    .sh h3{font-size:18px}
+    .acts{margin-left:0; width:100%}
+  }
+
+  /* ===== 인쇄 ===== */
+  @media print{
+    :root{
+      --bg:#fff; --surface:#fff; --surface-2:#fff; --ink:#000; --ink-2:#333; --ink-3:#666;
+      --line:#ccc; --line-2:#999; --code-bg:#f2f2f2; --code-ink:#000;
+      --tip-bg:#fbf7ea; --tip-line:#ddd; --tip-ink:#000; --accent:#000; --accent-ink:#fff;
+      --blue-bg:#eee; --green-bg:#eee; --purple-bg:#eee; --amber-bg:#eee; --gray-bg:#eee;
+      --blue:#000; --green:#000; --purple:#000; --amber:#000; --gray:#000;
+    }
+    body{font-size:11pt; background:#fff}
+    .wrap{max-width:none; padding:0}
+    .acts, .tabs, .dmbar, .foot{display:none !important}
+    .step{border:1px solid #ccc; box-shadow:none; margin-bottom:9px; padding:13px 15px}
+    .sechead{page-break-after:avoid; margin-top:20px}
+    .lk a{background:none; color:#000; border:1px solid #999; padding:4px 9px}
+    .lk a::after{content:" (" attr(href) ")"; font-size:8pt; font-weight:400}
+    h1{font-size:19pt}
+    @page{margin:14mm}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div>
+      <h1>검색등록 한 걸음씩 — 전체 보기</h1>
+      <p class="sub">구글·네이버·빙에 내 사이트를 등록하는 전 과정입니다. 인쇄해서 옆에 두고 하나씩 지워가세요.</p>
+    </div>
+    <div class="acts">
+      <a class="pri" href="index.html">✓ 체크리스트 모드</a>
+      <button id="print">🖨 인쇄 · PDF 저장</button>
+    </div>
+  </div>
+
+  <div class="dmbar">
+    <label for="dm">내 사이트 주소</label>
+    <input id="dm" type="url" placeholder="https://example.com" spellcheck="false" />
+    <button id="dmsave">적용</button>
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+  <div id="body"></div>
+
+  <p class="foot">
+    진행 상황을 저장하며 한 단계씩 따라 하려면 <a href="index.html">체크리스트 모드</a>를 쓰세요.
+  </p>
+</div>
+
+<script src="data.js"></script>
+<script>
+(function(){
+  "use strict";
+  var mem = {};
+  function get(k){ try{ var v=localStorage.getItem(k); return v===null?(k in mem?mem[k]:null):v; }catch(e){ return (k in mem)?mem[k]:null; } }
+  function set(k,v){ mem[k]=v; try{ localStorage.setItem(k,v); }catch(e){} }
+
+  var KEY_DM = "seoguide.domain";
+  var domain = get(KEY_DM) || "";
+  var filter = "all";
+  var $ = function(id){ return document.getElementById(id); };
+
+  function fill(s){
+    if (typeof s !== "string") return s;
+    return s.replace(/\{\{내주소\}\}/g, domain || "https://내사이트주소.com");
+  }
+  function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  function normalize(d){
+    d=(d||"").trim(); if(!d) return "";
+    if(!/^https?:\/\//i.test(d)) d="https://"+d;
+    return d.replace(/\/+$/,"");
+  }
+
+  function buildTabs(){
+    var h = '<button class="' + (filter==="all"?"on":"") + '" data-f="all">전체</button>';
+    for (var k in SECTIONS){
+      h += '<button class="' + (filter===k?"on":"") + '" data-f="' + k + '">' + SECTIONS[k].emoji + " " + SECTIONS[k].short + "</button>";
+    }
+    $("tabs").innerHTML = h;
+  }
+
+  function build(){
+    var h = "", last = null, counts = {};
+    for (var i=0;i<STEPS.length;i++){ counts[STEPS[i].sec] = (counts[STEPS[i].sec]||0)+1; }
+
+    for (var i=0;i<STEPS.length;i++){
+      var st = STEPS[i], sec = SECTIONS[st.sec];
+      if (filter !== "all" && st.sec !== filter) continue;
+
+      if (st.sec !== last){
+        h += '<div class="sechead"><h2>' + sec.emoji + " " + sec.name + '</h2><span class="n">' + counts[st.sec] + "단계</span></div>";
+        last = st.sec;
+      }
+
+      h += '<div class="step">';
+      h += '<div class="sh"><span class="num n-' + sec.color + '">' + (i+1) + "</span>";
+      h += "<h3>" + fill(st.title) + '</h3><span class="m">약 ' + st.minutes + "분</span></div>";
+      h += '<p class="lead">' + fill(st.lead) + "</p>";
+
+      if (st.todo && st.todo.length){
+        h += '<ol class="todo">';
+        for (var j=0;j<st.todo.length;j++) h += "<li>" + fill(st.todo[j]) + "</li>";
+        h += "</ol>";
+      }
+      if (st.copy){
+        h += '<p class="lbl">' + (st.copyLabel||"복사해서 쓰세요") + '</p><div class="inline">' + esc(fill(st.copy)) + "</div>";
+      }
+      if (st.code){
+        h += '<p class="lbl">' + (st.codeLabel||"코드") + "</p><pre>" + esc(fill(st.code)) + "</pre>";
+      }
+      if (st.links && st.links.length){
+        h += '<div class="lk">';
+        for (var m=0;m<st.links.length;m++)
+          h += '<a href="' + st.links[m].url + '" target="_blank" rel="noopener noreferrer">' + st.links[m].label + "</a>";
+        h += "</div>";
+      }
+      if (st.tip) h += '<p class="tip">' + fill(st.tip) + "</p>";
+      h += "</div>";
+    }
+    $("body").innerHTML = h;
+  }
+
+  $("tabs").addEventListener("click", function(e){
+    var b = e.target.closest("[data-f]");
+    if (!b) return;
+    filter = b.getAttribute("data-f");
+    buildTabs(); build();
+    window.scrollTo({ top:0, behavior:"smooth" });
+  });
+
+  $("print").addEventListener("click", function(){
+    var f = filter; filter = "all"; build();
+    setTimeout(function(){ window.print(); filter = f; build(); }, 120);
+  });
+
+  function save(){
+    domain = normalize($("dm").value);
+    $("dm").value = domain;
+    set(KEY_DM, domain);
+    build();
+  }
+  $("dmsave").addEventListener("click", save);
+  $("dm").addEventListener("keydown", function(e){ if(e.key==="Enter") save(); });
+
+  $("dm").value = domain;
+  buildTabs(); build();
+})();
+</script>
+</body>
+</html>
