@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  sitemap.xml — 내 사이트의 "목차"입니다.
+
+  사용법
+   1. 아래 https://내사이트주소.com 을 내 실제 주소로 모두 바꾸세요.
+   2. 페이지를 추가하려면 <url> ... </url> 덩어리를 복사해서 <loc> 주소만 바꾸세요.
+   3. <lastmod> 는 그 페이지를 마지막으로 고친 날짜입니다 (YYYY-MM-DD).
+   4. 파일 이름을 sitemap.xml 로 저장해 사이트 최상단(루트)에 올리세요.
+   5. 브라우저에서 https://내사이트주소.com/sitemap.xml 로 열어 확인하세요.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- 첫 페이지 (가장 중요) -->
+  <url>
+    <loc>https://내사이트주소.com/</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- 소개 페이지 -->
+  <url>
+    <loc>https://내사이트주소.com/about</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 페이지가 늘어나면 아래 덩어리를 복사해서 주소만 바꿔 추가하세요 -->
+  <url>
+    <loc>https://내사이트주소.com/contact</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>
